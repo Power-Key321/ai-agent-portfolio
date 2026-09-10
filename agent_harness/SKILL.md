@@ -1,5 +1,5 @@
 ---
-name: harness
+name: agent_harness
 description: 乐高式 Agent 编排框架 — 把编排系统拆成六层 24 个可插拔模块（预处理→拆解→调度→上下文→执行→交付），按任务类型自动装配最优模块链，螺旋收敛逼近用户真实意图。含 6 类任务策略、三层意图路由、量化门检与退化检测、反馈自优化闭环。
 version: 1.0.0
 author: Custom
@@ -16,12 +16,17 @@ Agent Harness 乐高框架 — 将编排系统拆为可插拔独立模块（预�
 
 ## 安装
 
-把本目录（`agent_harness/`）放到 `~/.claude/skills/harness/` 下，或放进项目的 `.claude/skills/harness/`。也可以跳过安装，直接按下文第 2 步把仓库路径加进 `sys.path` 调用。
+```bash
+cp -r agent_harness ~/.claude/skills/agent_harness     # 用户级
+# 或   cp -r agent_harness <项目>/.claude/skills/agent_harness   # 项目级
+```
+
+**不要改目录名。** 本目录既是技能目录、也是 Python 包目录——`from agent_harness.adapters...` 依赖它叫 `agent_harness`。改名会让技能名和 import 名字对不上。
 
 ## 触发
 
 ```
-/harness <任务描述>
+/agent_harness <任务描述>
 ```
 
 ## 指令
@@ -44,8 +49,9 @@ Agent Harness 乐高框架 — 将编排系统拆为可插拔独立模块（预�
 先安装依赖（`pip install -r requirements.txt`，需要 Python 3.10+），再：
 
 ```python
-import sys
-sys.path.insert(0, "<repo-root>")          # 克隆后包含 agent_harness/ 的那一层目录
+import sys, os
+sys.path.insert(0, os.path.expanduser("~/.claude/skills"))   # 装到技能目录时用这行
+# 或 sys.path.insert(0, "<repo-root>")                       # 直接跑克隆仓库时：包含 agent_harness/ 的那一层
 
 from agent_harness.adapters.claude_code import get_adapter
 

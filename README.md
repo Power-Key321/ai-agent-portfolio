@@ -29,6 +29,9 @@
 
 ### 安装
 
+> ✅ **在 Claude Code 上开箱即用。** 四个技能都符合 Claude Code 的技能约定（目录名 = `SKILL.md` 里的 `name`），复制进去即可，**不需要改任何文件名或配置**。
+> Codex 和 Cursor 也支持同一套格式，见 [INSTALL.md](./INSTALL.md)。
+
 四个目录都带 `SKILL.md`，都是标准 Agent Skill 格式。**复制到两个目录，Claude Code / Codex / Cursor 全覆盖：**
 
 ```bash
@@ -37,7 +40,7 @@ cd ai-agent-portfolio
 
 mkdir -p ~/.claude/skills ~/.codex/skills          # Claude Code + Cursor 读前者，Codex 读后者
 
-cp -r agent_harness              ~/.claude/skills/harness
+cp -r agent_harness              ~/.claude/skills/agent_harness
 cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
 cp -r tools/smart-loop           ~/.claude/skills/smart-loop
 cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
@@ -45,7 +48,7 @@ cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
 cp -r ~/.claude/skills/*         ~/.codex/skills/
 ```
 
-> ⚠️ `agent_harness/` 要改名为 `harness/` —— 它的 `SKILL.md` 里写的是 `name: harness`。其余三个目录名本来就对得上。
+> ⚠️ **不要改目录名。** `agent_harness/` 既是技能目录也是 Python 包目录，改名会让 `import agent_harness` 失败。
 
 | 目录 | 依赖 | Claude Code | Codex | Cursor |
 |---|---|---|---|---|
@@ -167,6 +170,9 @@ For an agent product role, I think this is closer to the essence of the job than
 
 ### Install
 
+> ✅ **Works out of the box on Claude Code.** All four skills follow the Claude Code convention (directory name = the `name` field in `SKILL.md`). Copy them in — **no renaming, no configuration**.
+> Codex and Cursor support the same format; see [INSTALL.md](./INSTALL.md).
+
 All four directories ship a `SKILL.md` in the standard Agent Skill format. **Copy them into two locations and you cover Claude Code, Codex, and Cursor:**
 
 ```bash
@@ -175,7 +181,7 @@ cd ai-agent-portfolio
 
 mkdir -p ~/.claude/skills ~/.codex/skills          # Claude Code + Cursor read the first; Codex reads the second
 
-cp -r agent_harness              ~/.claude/skills/harness
+cp -r agent_harness              ~/.claude/skills/agent_harness
 cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
 cp -r tools/smart-loop           ~/.claude/skills/smart-loop
 cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
@@ -183,7 +189,7 @@ cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
 cp -r ~/.claude/skills/*         ~/.codex/skills/
 ```
 
-> ⚠️ Rename `agent_harness/` to `harness/` — its `SKILL.md` declares `name: harness`. The other three directory names already match.
+> ⚠️ **Do not rename the directories.** `agent_harness/` is both the skill directory and the Python package directory — renaming it breaks `import agent_harness`.
 
 | Directory | Dependencies | Claude Code | Codex | Cursor |
 |---|---|---|---|---|

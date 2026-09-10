@@ -2,6 +2,9 @@
 
 四个技能，三个工具，**装法只有一条：把目录复制到指定位置。**
 
+> ✅ **Claude Code 上开箱即用。** 四个技能都符合 Claude Code 的技能约定（目录名 = `SKILL.md` 里的 `name`），复制进去即可生效——**不需要改文件名、改目录名或改任何配置**。
+> 下面第一段命令装完，Claude Code 就能直接用了。
+
 [中文](#中文) ｜ [English](#english)
 
 ---
@@ -19,20 +22,17 @@ cd ai-agent-portfolio
 
 # ① Claude Code 和 Cursor 都读这里
 mkdir -p ~/.claude/skills
-cp -r agent_harness              ~/.claude/skills/harness
+cp -r agent_harness              ~/.claude/skills/agent_harness
 cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
 cp -r tools/smart-loop           ~/.claude/skills/smart-loop
 cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
 
 # ② Codex 读这里
 mkdir -p ~/.codex/skills
-cp -r agent_harness              ~/.codex/skills/harness
-cp -r multi-agent-research       ~/.codex/skills/multi-agent-research
-cp -r tools/smart-loop           ~/.codex/skills/smart-loop
-cp -r tools/tech-reserve-finder  ~/.codex/skills/tech-reserve-finder
+cp -r ~/.claude/skills/*         ~/.codex/skills/
 ```
 
-只想用一个工具，就只跑其中一段。Windows PowerShell 用这个：
+只要 Claude Code，跑完 ① 就结束了。只想用 Codex，把 ① 的目标目录换成 `~/.codex/skills` 即可。Windows PowerShell 用这个：
 
 ```powershell
 git clone https://github.com/Power-Key321/ai-agent-portfolio
@@ -40,11 +40,10 @@ cd ai-agent-portfolio
 New-Item -ItemType Directory -Force "$HOME\.claude\skills", "$HOME\.codex\skills" | Out-Null
 Copy-Item agent_harness, multi-agent-research "$HOME\.claude\skills\" -Recurse -Force
 Copy-Item tools\smart-loop, tools\tech-reserve-finder "$HOME\.claude\skills\" -Recurse -Force
-Rename-Item "$HOME\.claude\skills\agent_harness" harness
 Copy-Item "$HOME\.claude\skills\*" "$HOME\.codex\skills\" -Recurse -Force
 ```
 
-> ⚠️ **`agent_harness/` 复制过去后要改名为 `harness/`**，因为它的 `SKILL.md` 里写的是 `name: harness`。其余三个目录名本来就对得上。
+> ⚠️ **不要改目录名。** `agent_harness/` 既是技能目录、也是 Python 包目录——改名会让 `import agent_harness` 失败。四个目录名已经和各自的 `name` 字段一致，原样复制即可。
 
 ---
 
@@ -74,7 +73,7 @@ Copy-Item "$HOME\.claude\skills\*" "$HOME\.codex\skills\" -Recurse -Force
 
 | 工具 | 怎么触发 |
 |---|---|
-| **Claude Code** | 自动加载——描述匹配到 `SKILL.md` 里的 `description` 就会用上。也可以直接说 `/harness <任务>` |
+| **Claude Code** | 自动加载——描述匹配到 `SKILL.md` 里的 `description` 就会用上。也可以直接说 `/agent_harness <任务>` |
 | **Codex** | 输入 `/skills` 查看已装载的技能，用 `$技能名` 显式调用 |
 | **Cursor** | 自动加载，和 Claude Code 一样按 `description` 匹配 |
 
@@ -102,7 +101,7 @@ Copy-Item "$HOME\.claude\skills\*" "$HOME\.codex\skills\" -Recurse -Force
 
 | 现象 | 原因 |
 |---|---|
-| 技能没被自动加载 | 目录名和 `SKILL.md` 里的 `name` 不一致（最常见：`agent_harness` 没改成 `harness`） |
+| 技能没被自动加载 | 目录名和 `SKILL.md` 里的 `name` 不一致——按上面的命令原样复制不会出现这个问题 |
 | Codex 里 `/skills` 是空的 | 装到了 `~/.claude/skills/`。Codex 不读那个目录，要装到 `~/.codex/skills/` |
 | `agent_harness` 报 `ModuleNotFoundError` | 没装依赖，或者忘了 `pip install -r requirements.txt` |
 
@@ -114,6 +113,9 @@ Copy-Item "$HOME\.claude\skills\*" "$HOME\.codex\skills\" -Recurse -Force
 <a id="english"></a>
 ## English
 
+> ✅ **Works out of the box on Claude Code.** All four skills follow the Claude Code convention (directory name = the `name` field in `SKILL.md`). Copy them in and they work — **no renaming, no configuration.**
+> The first block below is all Claude Code needs.
+
 ### The short version
 
 **Two directories cover all three tools.**
@@ -124,22 +126,19 @@ cd ai-agent-portfolio
 
 # (1) Read by both Claude Code and Cursor
 mkdir -p ~/.claude/skills
-cp -r agent_harness              ~/.claude/skills/harness
+cp -r agent_harness              ~/.claude/skills/agent_harness
 cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
 cp -r tools/smart-loop           ~/.claude/skills/smart-loop
 cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
 
 # (2) Read by Codex
 mkdir -p ~/.codex/skills
-cp -r agent_harness              ~/.codex/skills/harness
-cp -r multi-agent-research       ~/.codex/skills/multi-agent-research
-cp -r tools/smart-loop           ~/.codex/skills/smart-loop
-cp -r tools/tech-reserve-finder  ~/.codex/skills/tech-reserve-finder
+cp -r ~/.claude/skills/*         ~/.codex/skills/
 ```
 
-Using only one tool? Run only that block. On Windows PowerShell, use the script in the Chinese section above.
+Claude Code only? Block (1) is all you need. Codex only? Point block (1) at `~/.codex/skills` instead. On Windows PowerShell, use the script in the Chinese section above.
 
-> ⚠️ **Rename `agent_harness/` to `harness/` after copying** — its `SKILL.md` declares `name: harness`. The other three directory names already match.
+> ⚠️ **Do not rename the directories.** `agent_harness/` is both the skill directory and the Python package directory — renaming it breaks `import agent_harness`. All four directory names already match their `name` fields, so copy them as-is.
 
 ---
 
@@ -169,7 +168,7 @@ You can also install for a **single project**: drop the directories into the pro
 
 | Tool | How to trigger |
 |---|---|
-| **Claude Code** | Auto-loaded — matches the `description` field in `SKILL.md`. You can also type `/harness <task>` |
+| **Claude Code** | Auto-loaded — matches the `description` field in `SKILL.md`. You can also type `/agent_harness <task>` |
 | **Codex** | Type `/skills` to list what's loaded, then `$skill-name` to invoke explicitly |
 | **Cursor** | Auto-loaded, matched on `description` just like Claude Code |
 
@@ -197,7 +196,7 @@ Two caveats:
 
 | Symptom | Cause |
 |---|---|
-| Skill isn't auto-loaded | Directory name doesn't match the `name` field in `SKILL.md` (most often: `agent_harness` wasn't renamed to `harness`) |
+| Skill isn't auto-loaded | Directory name doesn't match the `name` field in `SKILL.md` — copying as shown above avoids this entirely |
 | `/skills` is empty in Codex | You installed to `~/.claude/skills/`. Codex doesn't read that — use `~/.codex/skills/` |
 | `agent_harness` raises `ModuleNotFoundError` | Dependencies not installed — run `pip install -r requirements.txt` |
 

@@ -4,10 +4,10 @@ Claude Code Adapter — 将 Agent Harness 对接到 Claude Code CLI。
 v3: 继承 AdapterBase 协议，与 Codex/Cursor 适配器共享接口。
 
 用法（在 Claude Code 中通过 skill 调用）:
-    /harness "帮我实现一个JWT认证中间件"
+    /agent_harness "帮我实现一个JWT认证中间件"
 
 实际流程:
-    skill.md → 触发 → claude_code.py → Harness.start(task)
+    SKILL.md → 触发 → claude_code.py → Harness.start(task)
     → 螺旋收敛 → 交付结果
 """
 
