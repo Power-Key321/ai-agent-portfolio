@@ -27,6 +27,31 @@
 
 ---
 
+### 怎么用
+
+四个目录都带 `SKILL.md`，可以直接装进 Claude Code：
+
+```bash
+git clone https://github.com/Power-Key321/ai-agent-portfolio
+cd ai-agent-portfolio
+
+cp -r agent_harness              ~/.claude/skills/harness
+cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
+cp -r tools/smart-loop           ~/.claude/skills/smart-loop
+cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
+```
+
+| 目录 | 装完就能用？ | 说明 |
+|---|---|---|
+| `agent_harness/` | 需装依赖 | Python 3.10+，`pip install -r requirements.txt`。目录名要改成 `harness`（与 `SKILL.md` 里的 `name` 一致） |
+| `multi-agent-research/` | 可用 | 无额外依赖。它是一份入口说明 + 一个可执行的 Workflow 脚本，由 Claude Code 的 Workflow 引擎运行 |
+| `tools/smart-loop/` | 可用 | 纯指令型技能，复制进去即生效 |
+| `tools/tech-reserve-finder/` | 可用 | 纯指令型技能，复制进去即生效 |
+
+> `~/.claude/skills/<目录名>/SKILL.md` 是 Claude Code 的技能约定：**目录名即技能名**，`SKILL.md` 必须带 YAML frontmatter（至少 `name` 和 `description`），其中 `description` 决定这个技能在什么任务下被自动加载。
+
+---
+
 ### 1. harness — 乐高式 Agent 编排框架
 
 **核心问题**：写代码和做调研对流程的要求完全不同，但大多数 Agent 编排都是一条固定流水线。
@@ -129,6 +154,31 @@ For an agent product role, I think this is closer to the essence of the job than
 | **[agent_harness](./agent_harness/)** | A LEGO-style agent orchestration framework | 24 pluggable modules / 6 task strategies / 21.7K LOC |
 | **[multi-agent-research](./multi-agent-research/)** | An adversarial-verification multi-agent research framework | 7-stage workflow / 1,134-line engine / 6 self-audit rounds |
 | **[tools](./tools/)** | Automation toolkit | Cross-industry technology reserve finder, general-purpose task loop |
+
+---
+
+### How to Use
+
+All four directories ship a `SKILL.md` and can be installed into Claude Code directly:
+
+```bash
+git clone https://github.com/Power-Key321/ai-agent-portfolio
+cd ai-agent-portfolio
+
+cp -r agent_harness              ~/.claude/skills/harness
+cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
+cp -r tools/smart-loop           ~/.claude/skills/smart-loop
+cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
+```
+
+| Directory | Works out of the box? | Notes |
+|---|---|---|
+| `agent_harness/` | Needs dependencies | Python 3.10+, then `pip install -r requirements.txt`. Rename the folder to `harness` so it matches the `name` field in `SKILL.md` |
+| `multi-agent-research/` | Yes | No extra dependencies. It is an entry document plus an executable Workflow script, run by Claude Code's Workflow engine |
+| `tools/smart-loop/` | Yes | Pure instruction skill — drop it in and it works |
+| `tools/tech-reserve-finder/` | Yes | Pure instruction skill — drop it in and it works |
+
+> `~/.claude/skills/<dir>/SKILL.md` is the Claude Code convention: **the directory name is the skill name**, and `SKILL.md` must carry YAML frontmatter (at minimum `name` and `description`). The `description` field is what decides which tasks auto-load the skill.
 
 ---
 

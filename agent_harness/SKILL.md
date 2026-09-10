@@ -1,3 +1,11 @@
+---
+name: harness
+description: 乐高式 Agent 编排框架 — 把编排系统拆成六层 24 个可插拔模块（预处理→拆解→调度→上下文→执行→交付），按任务类型自动装配最优模块链，螺旋收敛逼近用户真实意图。含 6 类任务策略、三层意图路由、量化门检与退化检测、反馈自优化闭环。
+version: 1.0.0
+author: Custom
+tags: [agent, 编排框架, 模块化, 螺旋收敛, 量化门检, 意图路由, 退化检测]
+---
+
 # Agent Harness Skill — Claude Code 入口
 
 ## 描述
@@ -5,6 +13,10 @@
 Agent Harness 乐高框架 — 将编排系统拆为可插拔独立模块（预处理→拆解→调度→上下文→执行→交付），不同任务自动装配最优组合，螺旋收敛逼近用户真实意图。
 
 **由你（Claude Code）负责意图分类，Harness 负责模块装配和螺旋执行。**
+
+## 安装
+
+把本目录（`agent_harness/`）放到 `~/.claude/skills/harness/` 下，或放进项目的 `.claude/skills/harness/`。也可以跳过安装，直接按下文第 2 步把仓库路径加进 `sys.path` 调用。
 
 ## 触发
 
@@ -29,9 +41,11 @@ Agent Harness 乐高框架 — 将编排系统拆为可插拔独立模块（预�
 
 ### 2. 加载 Harness 并执行
 
+先安装依赖（`pip install -r requirements.txt`，需要 Python 3.10+），再：
+
 ```python
 import sys
-sys.path.insert(0, "<项目根目录>")          # 例: /path/to/agent-skills/harness
+sys.path.insert(0, "<repo-root>")          # 克隆后包含 agent_harness/ 的那一层目录
 
 from agent_harness.adapters.claude_code import get_adapter
 
@@ -81,4 +95,5 @@ result = adapter.diagnose("<用户任务>", intent_override="<策略>")
 
 - Harness 目前的 `execute` 模块只做占位执行（产出 `_artifacts` 标记），**真正的子任务执行由你（Claude Code）在收到交付物后完成**
 - 螺旋收敛在当前 MVP 中默认运行 5 轮，`simple_query` 直接短路不进入螺旋
+- 反馈自优化会写入 `feedback/` 目录（策略权重、收敛历史、学习到的路由模式）。若要多环境隔离，设置环境变量 `AGENT_HARNESS_STATE_DIR` 指到独立目录
 - 框架的核心价值在于 **自动化装配和收敛管理**，把你从"每次都要重新设计工作流"中解放出来
