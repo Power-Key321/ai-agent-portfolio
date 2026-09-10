@@ -1,0 +1,177 @@
+{
+  "strategies": {
+    "code_feature": {
+      "intent_patterns": [
+        "实现",
+        "添加.*功能",
+        "开发",
+        "写一个",
+        "创建",
+        "做一个",
+        "帮我.*做",
+        "帮我.*写",
+        "帮我.*实现",
+        "create",
+        "add.*feature",
+        "implement",
+        "build",
+        "make.*a"
+      ],
+      "assembly": [
+        "preproc.code",
+        "decomp.linear",
+        "schedule.sequential",
+        "context.full",
+        "execute",
+        "deliver.diff"
+      ],
+      "max_parallel_subtasks": 3,
+      "default_model": "opus",
+      "retry_policy": "standard",
+      "spiral_config": {
+        "max_iterations": 5,
+        "convergence_threshold": 0.05,
+        "refinement_strategy": "add_constraints"
+      }
+    },
+    "code_fix": {
+      "intent_patterns": [
+        "修复",
+        "fix",
+        "bug",
+        "报错",
+        "错误",
+        "error",
+        "不工作",
+        "坏了"
+      ],
+      "assembly": [
+        "preproc.code",
+        "decomp.single",
+        "schedule.sequential",
+        "context.full",
+        "execute",
+        "deliver.diff"
+      ],
+      "max_parallel_subtasks": 1,
+      "default_model": "sonnet",
+      "retry_policy": "aggressive",
+      "spiral_config": {
+        "max_iterations": 3,
+        "convergence_threshold": 0.08,
+        "refinement_strategy": "narrow_scope"
+      }
+    },
+    "data_analysis": {
+      "intent_patterns": [
+        "分析",
+        "数据",
+        "统计",
+        "可视化",
+        "报表",
+        "analy",
+        "report",
+        "chart",
+        "plot"
+      ],
+      "assembly": [
+        "preproc.full",
+        "decomp.linear",
+        "schedule.sequential",
+        "context.minimal",
+        "execute",
+        "deliver.report"
+      ],
+      "max_parallel_subtasks": 5,
+      "default_model": "opus",
+      "retry_policy": "standard",
+      "spiral_config": {
+        "max_iterations": 4,
+        "convergence_threshold": 0.05,
+        "refinement_strategy": "add_constraints"
+      }
+    },
+    "research": {
+      "intent_patterns": [
+        "调研",
+        "搜索",
+        "查找",
+        "找",
+        "查",
+        "research",
+        "search",
+        "find",
+        "look"
+      ],
+      "assembly": [
+        "preproc.full",
+        "decomp.linear",
+        "schedule.sequential",
+        "context.minimal",
+        "execute",
+        "deliver.report"
+      ],
+      "max_parallel_subtasks": 8,
+      "default_model": "haiku",
+      "retry_policy": "conservative",
+      "spiral_config": {
+        "max_iterations": 3,
+        "convergence_threshold": 0.1,
+        "refinement_strategy": "narrow_scope"
+      }
+    },
+    "simple_query": {
+      "intent_patterns": [
+        "什么是",
+        "怎么",
+        "解释",
+        "说明",
+        "what is",
+        "how to",
+        "explain"
+      ],
+      "assembly": [
+        "preproc.simple",
+        "decomp.single",
+        "schedule.sequential",
+        "context.minimal",
+        "execute",
+        "deliver.report"
+      ],
+      "max_parallel_subtasks": 1,
+      "default_model": "haiku",
+      "retry_policy": "conservative",
+      "spiral_config": {
+        "max_iterations": 1,
+        "convergence_threshold": 0.2,
+        "refinement_strategy": null
+      }
+    },
+    "refactor": {
+      "intent_patterns": [
+        "重构",
+        "整理",
+        "优化结构",
+        "refactor",
+        "restructure",
+        "clean"
+      ],
+      "assembly": [
+        "preproc.code",
+        "decomp.linear",
+        "schedule.sequential",
+        "context.full",
+        "execute",
+        "deliver.diff"
+      ],
+      "max_parallel_subtasks": 2,
+      "default_model": "opus",
+      "retry_policy": "standard",
+      "spiral_config": {
+        "max_iterations": 4,
+        "convergence_threshold": 0.05,
+        "refinement_strategy": "add_constraints"
+      }
+    }
+  }
+}

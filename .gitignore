@@ -1,0 +1,86 @@
+# ============================================================
+#  安全基线 —— 以下类别永久不得进入版本库
+# ============================================================
+
+# --- 凭据 / 私钥（最高优先级，任何情况下不得提交）---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+.credentials*
+credentials.json
+secrets.json
+*secret*
+*token*
+*_passphrase*
+*.kdbx
+
+# --- 钱包 / 链上资产相关 ---
+*private_key*
+*wallet_address*
+*mnemonic*
+*seed_phrase*
+wallet*.json
+*_PRIVATE_KEY.txt
+
+# --- 运行数据 / 状态 / 缓存 ---
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+logs/
+.cache/
+.active_sessions/
+.locks/
+harness_states/
+*.bak
+
+# --- 框架自进化状态（运行单元测试即会自动生成）---
+# 含路由学习模式、策略权重、收敛历史——属运行时状态，且可能反映使用者真实输入
+feedback/
+*/feedback/
+
+# --- 知识图谱持久化（首次运行/跑测试时自动生成）---
+# 会记录使用者的技术栈与项目上下文，属个人数据，不进版本库
+knowledge_graph/
+
+# --- 业务数据（体积大且可能含敏感内容）---
+data/
+artifacts/
+*/data/
+*/artifacts/
+*.db
+*.sqlite
+*.sqlite3
+
+# --- 编辑器 / 系统 ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- 本地环境 ---
+.venv/
+venv/
+env/
+node_modules/
+dist/
+build/
+*.egg-info/
+
+# --- 个人材料：本仓库只发布作品，不收录简历/履历 ---
+*简历*
+*resume*
+*履历*
+experiments/

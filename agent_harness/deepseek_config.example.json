@@ -1,0 +1,6 @@
+{
+  "api_key": "<your-deepseek-api-key>",
+  "api_base": "https://api.deepseek.com",
+  "model": "deepseek-v4-flash",
+  "reasoner_model": "deepseek-v4-pro"
+}
