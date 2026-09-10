@@ -27,28 +27,36 @@
 
 ---
 
-### 怎么用
+### 安装
 
-四个目录都带 `SKILL.md`，可以直接装进 Claude Code：
+四个目录都带 `SKILL.md`，都是标准 Agent Skill 格式。**复制到两个目录，Claude Code / Codex / Cursor 全覆盖：**
 
 ```bash
 git clone https://github.com/Power-Key321/ai-agent-portfolio
 cd ai-agent-portfolio
 
+mkdir -p ~/.claude/skills ~/.codex/skills          # Claude Code + Cursor 读前者，Codex 读后者
+
 cp -r agent_harness              ~/.claude/skills/harness
 cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
 cp -r tools/smart-loop           ~/.claude/skills/smart-loop
 cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
+
+cp -r ~/.claude/skills/*         ~/.codex/skills/
 ```
 
-| 目录 | 装完就能用？ | 说明 |
-|---|---|---|
-| `agent_harness/` | 需装依赖 | Python 3.10+，`pip install -r requirements.txt`。目录名要改成 `harness`（与 `SKILL.md` 里的 `name` 一致） |
-| `multi-agent-research/` | 可用 | 无额外依赖。它是一份入口说明 + 一个可执行的 Workflow 脚本，由 Claude Code 的 Workflow 引擎运行 |
-| `tools/smart-loop/` | 可用 | 纯指令型技能，复制进去即生效 |
-| `tools/tech-reserve-finder/` | 可用 | 纯指令型技能，复制进去即生效 |
+> ⚠️ `agent_harness/` 要改名为 `harness/` —— 它的 `SKILL.md` 里写的是 `name: harness`。其余三个目录名本来就对得上。
 
-> `~/.claude/skills/<目录名>/SKILL.md` 是 Claude Code 的技能约定：**目录名即技能名**，`SKILL.md` 必须带 YAML frontmatter（至少 `name` 和 `description`），其中 `description` 决定这个技能在什么任务下被自动加载。
+| 目录 | 依赖 | Claude Code | Codex | Cursor |
+|---|---|---|---|---|
+| `tools/smart-loop/` | 无，纯指令 | ✅ | ✅ | ✅ |
+| `tools/tech-reserve-finder/` | 无，纯指令 | ✅ | ✅ | ✅ |
+| `agent_harness/` | Python 3.10+，`pip install -r requirements.txt` | ✅ | ⚠️ 只能读方法论 | ⚠️ 只能读方法论 |
+| `multi-agent-research/` | Claude Code 的 Workflow 引擎 | ✅ | ❌ | ❌ |
+
+**完整的跨工具安装说明、触发方式、排错：见 [INSTALL.md](./INSTALL.md)**
+
+> 技能约定的核心只有一条：**目录名要和 `SKILL.md` 里的 `name` 一致**，而 `description` 决定这个技能在什么任务下被自动加载——写得好不好，直接决定它会不会被用上。
 
 ---
 
@@ -157,28 +165,36 @@ For an agent product role, I think this is closer to the essence of the job than
 
 ---
 
-### How to Use
+### Install
 
-All four directories ship a `SKILL.md` and can be installed into Claude Code directly:
+All four directories ship a `SKILL.md` in the standard Agent Skill format. **Copy them into two locations and you cover Claude Code, Codex, and Cursor:**
 
 ```bash
 git clone https://github.com/Power-Key321/ai-agent-portfolio
 cd ai-agent-portfolio
 
+mkdir -p ~/.claude/skills ~/.codex/skills          # Claude Code + Cursor read the first; Codex reads the second
+
 cp -r agent_harness              ~/.claude/skills/harness
 cp -r multi-agent-research       ~/.claude/skills/multi-agent-research
 cp -r tools/smart-loop           ~/.claude/skills/smart-loop
 cp -r tools/tech-reserve-finder  ~/.claude/skills/tech-reserve-finder
+
+cp -r ~/.claude/skills/*         ~/.codex/skills/
 ```
 
-| Directory | Works out of the box? | Notes |
-|---|---|---|
-| `agent_harness/` | Needs dependencies | Python 3.10+, then `pip install -r requirements.txt`. Rename the folder to `harness` so it matches the `name` field in `SKILL.md` |
-| `multi-agent-research/` | Yes | No extra dependencies. It is an entry document plus an executable Workflow script, run by Claude Code's Workflow engine |
-| `tools/smart-loop/` | Yes | Pure instruction skill — drop it in and it works |
-| `tools/tech-reserve-finder/` | Yes | Pure instruction skill — drop it in and it works |
+> ⚠️ Rename `agent_harness/` to `harness/` — its `SKILL.md` declares `name: harness`. The other three directory names already match.
 
-> `~/.claude/skills/<dir>/SKILL.md` is the Claude Code convention: **the directory name is the skill name**, and `SKILL.md` must carry YAML frontmatter (at minimum `name` and `description`). The `description` field is what decides which tasks auto-load the skill.
+| Directory | Dependencies | Claude Code | Codex | Cursor |
+|---|---|---|---|---|
+| `tools/smart-loop/` | None — pure instructions | ✅ | ✅ | ✅ |
+| `tools/tech-reserve-finder/` | None — pure instructions | ✅ | ✅ | ✅ |
+| `agent_harness/` | Python 3.10+, `pip install -r requirements.txt` | ✅ | ⚠️ methodology only | ⚠️ methodology only |
+| `multi-agent-research/` | Claude Code's Workflow engine | ✅ | ❌ | ❌ |
+
+**Full cross-tool install guide, trigger methods, and troubleshooting: see [INSTALL.md](./INSTALL.md)**
+
+> The core convention is a single rule: **the directory name must match the `name` field in `SKILL.md`**, and the `description` field decides which tasks auto-load the skill — how well you write it determines whether the skill ever gets used.
 
 ---
 
