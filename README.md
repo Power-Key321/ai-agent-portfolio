@@ -23,7 +23,7 @@
 |---|---|---|
 | **[agent_harness](./agent_harness/)** | 乐高式 Agent 编排框架 | 24 个可插拔模块 / 6 类任务策略 / 21.7K 行 |
 | **[multi-agent-research](./multi-agent-research/)** | 多智能体对抗验证研究框架 | 7 阶段工作流 / 1,134 行引擎 / 6 轮自审计 |
-| **[tools](./tools/)** | 自动化工具集 | 通用任务循环执行器 |
+| **[tools](./tools/)** | 自动化工具集 | 跨产业技术储备发现器、通用任务循环 |
 
 ---
 
@@ -64,6 +64,10 @@
 ---
 
 ### 3. tools — 自动化工具集
+
+**[tech-reserve-finder](./tools/tech-reserve-finder/)** — 跨产业技术储备发现器
+
+面对一个技术难题时，按三步法（功能分解 → 能力匹配 → 差距评估）扫描 41 个工业大类，找出那个"已经在做同样物理操作"的产业，给出跨产业替代路径。核心洞见：全产业链的广度本身就是最大的隐性技术库。含 A/B/C 三级分级框架与已验证的 A 级案例。
 
 **[smart-loop](./tools/smart-loop/)** — 通用任务循环执行器
 
@@ -124,7 +128,7 @@ For an agent product role, I think this is closer to the essence of the job than
 |---|---|---|
 | **[agent_harness](./agent_harness/)** | A LEGO-style agent orchestration framework | 24 pluggable modules / 6 task strategies / 21.7K LOC |
 | **[multi-agent-research](./multi-agent-research/)** | An adversarial-verification multi-agent research framework | 7-stage workflow / 1,134-line engine / 6 self-audit rounds |
-| **[tools](./tools/)** | Automation toolkit | General-purpose task loop runner |
+| **[tools](./tools/)** | Automation toolkit | Cross-industry technology reserve finder, general-purpose task loop |
 
 ---
 
@@ -165,6 +169,10 @@ In a citation audit at 300-agent scale, it located one severe hallucinated citat
 ---
 
 ### 3. tools — Automation Toolkit
+
+**[tech-reserve-finder](./tools/tech-reserve-finder/)** — Cross-industry technology reserve finder
+
+Given a hard technology problem, this tool applies a three-step method (function decomposition → capability matching → gap assessment) to scan 41 industrial categories and locate the industry that is "already performing the same physical operation," yielding a cross-industry alternative. The core insight: the breadth of the full industrial chain is itself the largest hidden technology reserve. Includes an A/B/C classification framework and validated A-tier cases.
 
 **[smart-loop](./tools/smart-loop/)** — General-purpose task loop runner
 
