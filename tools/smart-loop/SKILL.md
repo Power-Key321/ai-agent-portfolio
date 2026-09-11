@@ -1,14 +1,14 @@
 ---
 name: smart-loop
-description: 长任务循环推进器 — 把一个多轮、周期长、中途可能失败的任务，拆成有量化指标的分阶段流程，一轮轮推进；卡住时走明确的降级路径，而不是死等或卡死。先用最少信息推断真实目标，再按「信息源→过滤→处理→产出→验证」的链条分解，每轮做量化门检。
-when_to_use: 当用户要做的是一件需要多轮迭代才能完成的事（研究、优化、批量处理、持续监控），或者需求本身模糊、需要边推进边确认时使用。也适合任务中途可能失败、必须提前想好退路的场景。不适用于三步内能做完的小任务。
-license: MIT
+description: 把多轮、周期长、中途可能失败的任务，拆成有量化指标的分阶段流程，一轮轮推进，卡住时自动降级。
+description_zh: 长任务循环推进器 — 先用最少信息推断真实目标，按「信息源→过滤→处理→产出→验证」链条分解，每轮做量化门检，连续退化时走明确降级路径。适用于长周期研究、批量处理、需要多轮迭代才能完成的任务，或需求模糊需边推进边确认的场景；不适用于三步内能做完的小任务。
+description_en: Long-Task Loop Driver — break a multi-round, long-horizon, failure-prone task into quantifiably-gated phases, advance round by round, and follow explicit degradation paths when stuck. For long-horizon research, batch processing, iterative tasks, or ambiguous requirements that need progressive refinement.
+display_name: 长任务循环推进器
+display_name_en: Long-Task Loop Driver
 allowed-tools: Read, Write, Edit, WebFetch, WebSearch
-metadata:
-  version: 6.2.0
-  author: Bo Wang
-  display_name: 长任务循环推进器
-  tags: [loop, 长任务, 任务分解, 量化执行, 中断恢复, 降级策略]
+version: 6.2.0
+author: Bo Wang
+license: MIT
 ---
 
 # 长任务循环推进器

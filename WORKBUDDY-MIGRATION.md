@@ -16,38 +16,38 @@ WorkBuddy（腾讯，2026-09-02 开放平台上线）的 Skill 基于同一套 *
 
 ## 改了什么
 
-### 1. frontmatter 对齐客户端真实契约（4 个技能）
+### 1. frontmatter 对齐官方文档契约（4 个技能）
 
-**修正一个此前的错误认知**：早先资料称"只认 5 个字段（无 `when_to_use`）"、"`allowed-tools` 用空格分隔"。实测本机 CodeBuddy 客户端二进制（`resources/app/out/main.js`），两条都是错的：
+**直接源自 `open.workbuddy.cn/docs/skill`**（本机代理 49150 抓取后解析），不再依赖二手资料。
 
-```js
-// 客户端真正读取的字段
-extractFrontmatterField(s,"name") · ("description") · ("when_to_use")
-              · ("license") · ("allowed-tools") · ("disable")
+**必填**：`name` + `description`。其他 10 个字段均为可选。
 
-// allowed-tools 的真实解析方式
-allowedTools: c ? c.split(",").map(d => d.trim()).filter(Boolean) : void 0
-```
+**修正三轮此前的错误认知**：
 
-→ **客户端读 6 个字段；`allowed-tools` 按逗号切分。**
+| 此前的说法 | 文档/二进制实测 | 影响 |
+|---|---|---|
+| "只认 5 个字段" | 文档列 10 个可选；客户端二进制读 6 个（含 `when_to_use`），但**文档里 0 命中** | `when_to_use` 在文档里没出现 → 上传版删除 |
+| "`allowed-tools` 用空格分隔" | 文档原文"多个用逗号分隔" + 客户端 `c.split(",")` | 全部改为逗号 |
+| "display_name 放在 metadata 下" | 文档原文：`display_name` / `display_name_en` 是**顶级字段** | 移出 `metadata:` |
+| "author / version 必须 metadata 嵌套" | 文档原文：`author` `version` 是**顶级字段** | 移出 `metadata:` |
+| "有 P0/P1/P2 安全分级" | 文档本节 **0 命中** | 来自社区说法，文档原文不支持 |
+| "正文 500 行 / 5000 token 硬上限" | 文档本节 0 命中 | 来自社区资料，未核对 |
 
-改动：
+最终 frontmatter 结构（`smart-loop` 为例）：
 
-```diff
- ---
- name: smart-loop
- description: 长任务循环推进器 — ...
-+when_to_use: 当用户要做的是一件需要多轮迭代才能完成的事…
- license: MIT
--allowed-tools: Read Write Edit WebFetch WebSearch      # 空格分隔 → 会被解析成一个工具名
-+allowed-tools: Read, Write, Edit, WebFetch, WebSearch  # 逗号分隔 → 正确
- metadata:
--  version: 6.1.0
-+  version: 6.2.0
-+  author: Bo Wang
-+  display_name: 长任务循环推进器
-   tags: [loop, 长任务, 任务分解, 量化执行, 中断恢复, 降级策略]
- ---
+```yaml
+---
+name: smart-loop                                                # kebab-case，与目录名一致
+description: 把多轮、周期长、中途可能失败的任务，拆成…            # 必填：一句话描述
+description_zh: 长任务循环推进器 — 先用最少信息推断真实目标…     # 可选：中文短介绍
+description_en: Long-Task Loop Driver — break a multi-round…    # 可选：英文短介绍
+display_name: 长任务循环推进器                                  # 可选：用户看到的名字
+display_name_en: Long-Task Loop Driver
+allowed-tools: Read, Write, Edit, WebFetch, WebSearch           # 逗号分隔
+version: 6.2.0
+author: Bo Wang
+license: MIT
+---
 ```
 
 各技能的 `allowed-tools`（**全部逗号分隔**）：
@@ -57,20 +57,16 @@ allowedTools: c ? c.split(",").map(d => d.trim()).filter(Boolean) : void 0
 | `smart-loop` | `Read, Write, Edit, WebFetch, WebSearch` |
 | `tech-reserve-finder` | `Read, Write, WebFetch, WebSearch` |
 | `multi-agent-research` | `Read, Write, WebFetch, WebSearch` |
-| `agent_harness` | `Read, Write, Bash`（保留 Python 调用路径需显式列 Bash） |
+| `agent_harness` | `Read, Write, Bash` |
 
-> 空格分隔在 Claude Code 上也能跑（三种格式都吃），但在 WorkBuddy 上会被解析成一个叫 `"Read Write WebFetch"` 的工具——**逗号是四端唯一都正确的写法**。
-> `metadata:` 是 Agent Skills 标准里 `version`/`author`/`tags` 的正规位置；`display_name` 是本项目自定义，供上传表单抄写。
+### 1b. 中文显示名
 
-### 1b. 中文显示名（用户可见名）
+`name` 必须是 ASCII kebab-case（与目录名一致），**不能写中文**。中文名走三个官方字段：
 
-`name` 必须是 ASCII 标识符（小写字母 + 数字 + 连字符，与目录名一致），**不能写中文**。中文名走四个地方：
-
-| 位置 | 内容 |
+| 字段 | 内容 |
 |---|---|
-| `when_to_use` | 中文，说清"什么时候用 + 什么时候不用"（客户端原生字段） |
-| `description` | 中文，`长任务循环推进器 — …` |
-| `metadata.display_name` | 中文名（给上传表单抄） |
+| `display_name` | 中文显示名（用户在 SkillHub 列表页看到的名字） |
+| `description_zh` | 简短中文介绍 |
 | 正文 H1 | 中文名 |
 
 对照：`smart-loop` → 长任务循环推进器；`tech-reserve-finder` → 跨产业技术平替发现器。

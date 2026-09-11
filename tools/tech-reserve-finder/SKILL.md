@@ -1,14 +1,14 @@
 ---
 name: tech-reserve-finder
-description: 跨产业技术平替发现器 — 当一个技术目标按常规路线推进缓慢时，把它拆成底层物理/化学操作，再到 41 个工业大类里找"其实早就在做同一件事"的产业。分 A/B/C 三级评估可行性与先发窗口，输出可落地的替代路线与差距评估。
-when_to_use: 用户提出一个技术难题、技术选型、或"这条路走不通/太贵/太慢"的困境，想知道有没有别的产业已经解决过类似问题时使用。适用于技术路线调研、供应链替代方案、跨行业方案迁移。不适用于纯信息查询、代码调试、或已有明确答案的问题。
-license: MIT
+description: 当一个技术目标按常规路线推进缓慢时，把它拆成底层物理/化学操作，再到 41 个工业大类里找"其实早就在做同一件事"的产业，分 A/B/C 三级评估可行性。
+description_zh: 跨产业技术平替发现器 — 系统性地扫描全产业链，找到那个"已经在做同一件物理操作"的产业，给出可迁移的替代路线与差距评估。适用于技术路线调研、供应链替代方案、跨行业方案迁移；不适用于纯信息查询、代码调试、已有明确答案的问题。
+description_en: Cross-Industry Technology Substitute Finder — when a technology goal is slow or blocked on the conventional path, decompose it into primitive physical/chemical operations, then search across 41 industrial categories for industries already doing the same thing. Outputs graded (A/B/C) migration routes with feasibility assessment.
+display_name: 跨产业技术平替发现器
+display_name_en: Cross-Industry Tech Substitute Finder
 allowed-tools: Read, Write, WebFetch, WebSearch
-metadata:
-  version: 1.1.0
-  author: Bo Wang
-  display_name: 跨产业技术平替发现器
-  tags: [技术储备, 跨产业替代, 技术路线, 供应链, 产业链分析, 功能分解, 平替方案]
+version: 1.1.0
+author: Bo Wang
+license: MIT
 ---
 
 # 跨产业技术平替发现器
