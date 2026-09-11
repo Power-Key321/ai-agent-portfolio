@@ -1,9 +1,12 @@
 ---
 name: agent_harness
 description: 乐高式 Agent 编排框架 — 把编排系统拆成六层 24 个可插拔模块（预处理→拆解→调度→上下文→执行→交付），按任务类型自动装配最优模块链，螺旋收敛逼近用户真实意图。含 6 类任务策略、三层意图路由、量化门检与退化检测、反馈自优化闭环。
-version: 1.0.0
-author: Custom
-tags: [agent, 编排框架, 模块化, 螺旋收敛, 量化门检, 意图路由, 退化检测]
+license: MIT
+allowed-tools: Read Write Bash
+metadata:
+  version: 1.0.0
+  author: Bo Wang
+  tags: [agent, 编排框架, 模块化, 螺旋收敛, 量化门检, 意图路由, 退化检测]
 ---
 
 # Agent Harness Skill — Claude Code 入口

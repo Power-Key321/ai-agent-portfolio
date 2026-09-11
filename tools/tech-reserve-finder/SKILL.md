@@ -1,9 +1,12 @@
 ---
 name: tech-reserve-finder
 description: 全产业链无意识技术储备发现器 — 当用户提出一个"被卡住"的技术难题时，按三步法（功能分解→能力匹配→差距评估）扫描 41 个工业大类，找到跨产业的替代/平替方案。包含 A/B/C 三级分类框架和 4 个已验证的 A 级案例。核心洞见：全产业链的广度和深度本身就是最大的隐性技术库。
-version: 1.0.0
-author: Custom
-tags: [技术储备, 跨产业替代, 降维突围, 供应链, 产业链分析, A级技术储备, 功能分解, 产业匹配]
+license: MIT
+allowed-tools: Read Write WebFetch WebSearch
+metadata:
+  version: 1.0.0
+  author: Bo Wang
+  tags: [技术储备, 跨产业替代, 降维突围, 供应链, 产业链分析, A级技术储备, 功能分解, 产业匹配]
 ---
 
 # 全产业链无意识技术储备发现器
