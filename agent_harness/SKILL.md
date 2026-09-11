@@ -1,11 +1,13 @@
 ---
 name: agent_harness
 description: 乐高式 Agent 编排框架 — 把编排系统拆成六层 24 个可插拔模块（预处理→拆解→调度→上下文→执行→交付），按任务类型自动装配最优模块链，螺旋收敛逼近用户真实意图。含 6 类任务策略、三层意图路由、量化门检与退化检测、反馈自优化闭环。
+when_to_use: 当需要按任务类型自动装配不同的处理流程、而不是每次都手工设计工作流时使用。适用于多类任务混杂、需要统一编排层与失败自愈的场景。依赖 Python 3.10+ 运行环境。
 license: MIT
-allowed-tools: Read Write Bash
+allowed-tools: Read, Write, Bash
 metadata:
   version: 1.0.0
   author: Bo Wang
+  display_name: 乐高式 Agent 编排框架
   tags: [agent, 编排框架, 模块化, 螺旋收敛, 量化门检, 意图路由, 退化检测]
 ---
 

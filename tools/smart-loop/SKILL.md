@@ -1,15 +1,19 @@
 ---
 name: smart-loop
-description: 智能循环任务规划与执行器 — 演绎式意图理解 + 熵减链分解 + 每轮量化门检 + 失败自动降级。适用于需要多轮迭代、执行周期长、中途可能失败的任务：先用最少信息演绎出真实目标，把需求拆成熵减链，每轮带量化指标推进，连续退化时走明确降级路径而不卡死。
+description: 长任务循环推进器 — 把一个多轮、周期长、中途可能失败的任务，拆成有量化指标的分阶段流程，一轮轮推进；卡住时走明确的降级路径，而不是死等或卡死。先用最少信息推断真实目标，再按「信息源→过滤→处理→产出→验证」的链条分解，每轮做量化门检。
+when_to_use: 当用户要做的是一件需要多轮迭代才能完成的事（研究、优化、批量处理、持续监控），或者需求本身模糊、需要边推进边确认时使用。也适合任务中途可能失败、必须提前想好退路的场景。不适用于三步内能做完的小任务。
 license: MIT
-allowed-tools: Read Write Edit WebFetch WebSearch
+allowed-tools: Read, Write, Edit, WebFetch, WebSearch
 metadata:
-  version: 6.1.0
+  version: 6.2.0
   author: Bo Wang
-  tags: [loop, 任务分解, 量化执行, 中断恢复, 降级策略]
+  display_name: 长任务循环推进器
+  tags: [loop, 长任务, 任务分解, 量化执行, 中断恢复, 降级策略]
 ---
 
-# Smart Loop
+# 长任务循环推进器
+
+> 英文标识：`smart-loop`
 
 ## 核心哲学
 

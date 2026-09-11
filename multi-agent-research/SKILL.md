@@ -1,11 +1,13 @@
 ---
 name: multi-agent-research
 description: 多智能体对抗验证研究框架 — 把复杂研究任务转化为「先立法、再求解、最后对抗验证」的竞赛：前置制宪会议博弈出唯一约束宪法，4 队并行求解，每条结论经多票对抗验证后按三轨裁决（可部署/待验证/拒绝）分类，跨队融合合成 + 多轮修补。适合"结论错了代价很大"的研究任务。
+when_to_use: 当研究任务的结论会被用来做重要决策、错一次的代价很大时使用。典型场景：需要多源交叉验证的调研、存在争议或有利益相关方的问题、结论必须附带可复现证据的审计类任务。不适用于日常问答、单一事实查询、或答案本身无争议的问题。
 license: MIT
-allowed-tools: Read Write WebFetch WebSearch
+allowed-tools: Read, Write, WebFetch, WebSearch
 metadata:
   version: 1.0.0
   author: Bo Wang
+  display_name: 多智能体对抗验证研究框架
   tags: [multi-agent, 对抗验证, 研究框架, 制宪会议, 三轨裁决, workflow, 证据约束]
 ---
 

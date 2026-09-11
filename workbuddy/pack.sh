@@ -41,4 +41,4 @@ done
 
 echo
 echo "打包完成 → $DIST"
-echo "上传前请先核对：skill 名 = 目录名、frontmatter 只有 5 个字段、正文 ≤500 行。"
+echo "上传前请先核对：skill 名 = 目录名、allowed-tools 用逗号分隔、正文 ≤500 行。"
